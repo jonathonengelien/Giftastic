@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     //Variables
 
-    var buttonTitles = ["yay", "annoyed", "omg", "devestated", "whatever", "lol", "happy", "bye", "angry", "desperate"];
+    var buttonTitles = ["yay", "annoyed", "omg", "devestated", "whatever", "lol", "happy", "bye", "angry"];
     var buttonHTML = '';
     var gifs = [];
 
@@ -57,16 +57,33 @@ $(document).ready(function () {
 
                 //Displaying the Image of the gif
                 var gifImage = $("<img>");
-                gifImage.addClass("image-fluid");
-                gifImage.attr("src", results[i].images.fixed_height.url);
+                gifImage.attr("src", results[i].images.fixed_width_still.url);
+
 
                 // Appending the paragraph and image tag to the animalDiv
                 gifDiv.append(p);
-                gifDiv.append(gifImage); 
-                
+                gifDiv.append(gifImage);
+
                 //Add the selected gifs to the html div
                 $("#gifs-appear-here").append(gifDiv);
             };
+
+            //Static and Unstatic Gifs
+            $(".gif").on("click", function () {
+                // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                var state = $(this).attr("data-state");
+                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                // Then, set the image's data-state to animate
+                // Else set src to the data-still value
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+            });
+
         });
 
     };
@@ -76,6 +93,7 @@ $(document).ready(function () {
 
     // Adding a click event listener to all elements with a class of "emotion-btn"
     $(document).on("click", ".emotion-btn", displayGifs);
+
 
     // Calling the renderButtons function to display the intial buttons
     renderButtons();
