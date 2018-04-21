@@ -44,7 +44,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             //First emptys the div container
-            //$("#gifs-appear-here").empty();
+            $("#gifs-appear-here").empty();
             //Variable to hold the response data
             var results = response.data;
 
@@ -62,22 +62,20 @@ $(document).ready(function () {
 
                 // Appending the paragraph and image tag to the animalDiv
                 gifDiv.append(p);
-                gifDiv.append(gifImage);
+                gifDiv.append(gifImage); 
+                
+                //Add the selected gifs to the html div
+                $("#gifs-appear-here").append(gifDiv);
             };
-
-            $("#gifs-appear-here").prepend(gifDiv);
         });
+
     };
 
 
     ////////////////////////////// Working Code ///////////////////////////////
 
     // Adding a click event listener to all elements with a class of "emotion-btn"
-    //$(document).on("click", ".emotion-btn", displayGifs);
-
-    // Adding a click event listener to all elements with a class of "emotion-btn"
     $(document).on("click", ".emotion-btn", displayGifs);
-
 
     // Calling the renderButtons function to display the intial buttons
     renderButtons();
