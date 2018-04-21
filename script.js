@@ -13,19 +13,20 @@ $(document).ready(function() {
 
   // Display Buttons
     function renderButtons() {
-        $("#buttons-view").empty();
+        $("#buttons-appear-here").empty();
+        console.log("I'm working!");
 
         for (var i = 0; i < buttonTitles.length; i++) {
             var a = $("<button>");
-            a.addClass("emotion");
-            a.attr("data-name", movies[i]);
-            a.text(movies[i]);
-            $("#buttons-view").append(a);
+            a.addClass("emotion-btn");
+            a.attr("data-name", buttonTitles[i]);
+            a.text(buttonTitles[i]);
+            $("#buttons-appear-here").append(a);
         }
     };
 
     // When a button is clicked
-    $("#add-movie").on("click", function(event) {
+    $("#add-emotion").on("click", function(event) {
         event.preventDefault();
         var emotion = $("#emotion-input").val().trim();
         buttonTitles.push(emotion);
@@ -50,18 +51,10 @@ $(document).ready(function() {
     
     ////////////////////////////// Working Code ///////////////////////////////
 
-    //Call the createButtons function
-    createButtons();
+    // Adding a click event listener to all elements with a class of "emotion-btn"
+    //$(document).on("click", ".emotion-btn", displayGifs);
 
-    /////// Respond to the Click Events ///////
-
-    //Event Listener for button clicked
-    
-
-    /////// Display the Gif contents from the Click Event ///////
-
-
-    /////// Add Button  ///////
-
+    // Calling the renderButtons function to display the intial buttons
+    renderButtons();
 
 });
